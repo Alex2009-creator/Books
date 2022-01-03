@@ -1,0 +1,42 @@
+<div class="field add_essence">
+    <h2>Авторы</h2>
+    <input id="addBtn" class="btn btn-outline-success" type="button" (click)="startCreateAutor()" value="добавить">
+</div>
+
+<div class="group add_essence">
+    <select #sort (input)="sortAutor(sort.value)">
+        <option value="id">cортировка</option>
+        <option value="surName">по фамилии</option>        
+    </select>
+
+    <div class="add_essence nowrap">
+        <input #search type="text" (change)="searchAutor(search.value)" value="{{inputSearchClear}}"
+            placeholder="найти по названию">
+        <input class="btn btn-outline-dark  butIn" type="button" (click)="clearSearch(search)" value="Очистить">
+        <span class="butSp" (click)="clearSearch(search)">&times;</span>
+    </div>
+
+</div>
+
+
+<table class="table table-striped table-hover">
+    <tbody *ngFor="let todo of autorMas">
+        <tr *ngIf="(todo.surName == search.value)||(search.value == '')">
+            <td><b>{{ todo.surName }}</b></td>
+            <td><b>{{ todo.firstName }}</b></td>
+            <td class="butIn"><b>{{ todo.patronymic }}</b></td>
+            <td class="butIn">{{ todo.dateBirth }}</td>
+            <td>
+                <input class="btn btn-outline-primary butIn" type="button" (click)="startEditAutor(todo)"
+                    value="редактировать">
+                <span class="butSp" (click)="startEditAutor(todo)">&#9998;</span>
+            </td>
+            <td>
+                <input class="btn btn-outline-danger butIn" type="button" (click)="deleteAutorBooks(todo.id)"
+                    value="удалить">
+                <span class="butSp" (click)="deleteAutorBooks(todo.id)">&times;</span>
+            </td>
+        </tr>
+    </tbody>
+
+</table>

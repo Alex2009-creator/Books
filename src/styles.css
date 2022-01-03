@@ -1,0 +1,55 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+.butSp {
+    display: none;
+  }
+  
+  .butBr {
+    display: none;
+  }
+
+  .butBr {
+    display: none;
+  }
+  
+  @media (max-width: 1000px) {
+    .example-container {
+      width: auto;
+    }
+  
+    .container {
+      font-size: 1rem;
+    }
+  
+    .butIn {
+      display: none;
+    }
+    
+    .butSp {
+      display: block;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .add_essence {
+      flex-wrap: wrap;
+    }
+  
+    #nav {  
+      margin-top: 5px;
+      padding: 5px;
+      flex-direction: row;  
+    }
+    
+    .butBr {
+      display: block;
+    } 
+  
+    h1{
+        display: none;
+    }
+  
+  }

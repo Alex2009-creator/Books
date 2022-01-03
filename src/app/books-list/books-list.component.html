@@ -1,0 +1,54 @@
+<div class="field add_essence">
+    <h2>Книги</h2>
+    <input id="addBtn" class="btn btn-outline-success" type="button" (click)="startCreateBook()" value="добавить">
+</div>
+<div class="group add_essence">
+    <div>
+        <select #sort (input)="sortBook(sort.value)">
+            <option value="id">cортировать</option>
+            <option value="title">по названию</option>
+            <option value="numberPages">по кол-ву страниц</option>
+            <option value="genre">по жанру</option>
+        </select>
+    </div>
+
+    <div>
+        <div class="add_essence wrap">
+            <input #search type="text" (change)="searchBook(search.value)" value="{{inputSearchClear}}"
+                placeholder="найти книгу">
+            <input class="btn btn-outline-dark butIn" type="button" (click)="clearSearch(search)" value="Очистить">
+            <span class="butSp" (click)="clearSearch(search)">&times;</span>
+        </div>
+    </div>
+
+    <div>
+        <select #filterAutor (input)="filterByAuthor(filterAutor.value)">
+            <option value="0">фильтр</option>
+            <option *ngFor="let autor of autorMas" value="{{autor['id']}}">{{autor['surName']}}</option>
+        </select>
+    </div>
+</div>
+
+<table class="table table-striped table-hover">
+    <tbody *ngFor="let book of bookMas">
+        <tr
+            *ngIf="((book.title == search.value)||(search.value == ''))&&(((book.id_autor == filter)&&(flagFilter == true))||((book.id_autor != 0)&&(flagFilter == false)))">
+            <td><b>{{ book.title }}</b></td>
+            <td class="butIn">{{ book.numberPages }} стр</td>
+            <td class="butIn">{{ book.genre }}</td>
+            <ng-container *ngFor="let autor of autorMas">
+                <td *ngIf="autor.id == book['id_autor']">{{autor.surName}}</td>
+            </ng-container>
+            <td>
+                <input class="btn btn-outline-primary butIn" type="button" (click)="startEditBook(book)"
+                    value="редактировать">
+                <span class="butSp" (click)="startEditBook(book)">&#9998;</span>
+            </td>
+            <td>
+                <input class="btn btn-outline-danger butIn" type="button" (click)="deleteCurentBook(book.id)"
+                    value="удалить">
+                <span class="butSp" (click)="deleteCurentBook(book.id)">&times;</span>
+            </td>
+        </tr>
+    </tbody>
+</table>

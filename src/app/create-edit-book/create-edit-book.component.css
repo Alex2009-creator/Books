@@ -1,0 +1,43 @@
+input {
+  border: 1px solid black;
+  outline: none;
+}
+
+input.ng-valid {
+  border: 2px solid green;
+}
+
+.errors {
+  color: red;
+}
+
+.group {
+  border-top: 2px black solid;
+  border-bottom: 2px black solid;
+  margin: 5px 0;
+  padding: 5px
+}
+
+input {
+  margin: 3px;
+}
+
+select {
+  margin: 3px
+}
+
+th {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  color: blue;
+}
+
+#addAutorBtn {
+  margin: 0 5px 10px
+}

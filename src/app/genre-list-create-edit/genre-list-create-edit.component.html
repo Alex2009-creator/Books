@@ -1,0 +1,30 @@
+<form class="group" [formGroup]="formGenre" (ngSubmit)="onSubmit(formGenre)">
+
+    <div class="field" id="add_genre">
+        <h2>Жанр</h2>
+        <div>
+            <input #addGenre type="text" formControlName="addGenre">
+            <input class="btn btn-outline-success" (click)="addDataGenre(addGenre.value)" type="submit"
+                value="добавить">
+        </div>
+
+        <div class="errors" *ngIf="formGenre.get('addGenre').hasError('pattern') && 
+        formGenre.get('addGenre').touched">
+            Неверный формат жанра.
+        </div>
+    </div>
+
+</form>
+
+<table class="table table-striped table-hover">
+    <tbody *ngFor="let genre of genreMas">
+        <tr>
+            <td><b>{{ genre.nameGenre }}</b></td>
+            <td>
+                <input class="btn btn-outline-danger butIn" type="button"
+                    (click)="deleteCurentGenre(genre.id, genre.nameGenre)" value="удалить">
+                <span class="butSp" (click)="deleteCurentGenre(genre.id, genre.nameGenre)">&times;</span>
+            </td>
+        </tr>
+    </tbody>
+</table>

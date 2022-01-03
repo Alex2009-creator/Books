@@ -1,0 +1,19 @@
+
+<div class="container">
+
+  <div class="navbar navbar-dark bg-primary"><h1>Библиотека</h1></div>
+
+  <div class="main">
+    
+      <div class="d-grid gap-2 col-2 mx-auto" id="nav">    
+        <a class="btn btn-primary" routerLink="/" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">Авторы</a>
+        <a class="btn btn-primary" routerLink="/book" routerLinkActive="active">Книги</a>
+        <a class="btn btn-primary" routerLink="/genre" routerLinkActive="active">Жанры</a>
+      </div>     
+ 
+    <div class="d-grid gap-10 col-10 mx-auto content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,56 @@
+<form class="group" [formGroup]="formBook" (ngSubmit)="onSubmit(formBook)">
+
+    <h2>{{createEditBookTitle}}</h2>
+    <div class="field">
+        Автор: <br>
+        <select #id_autor formControlName="id_autor">
+            <option *ngFor="let autor of autorMas" value="{{autor['id']}}">{{autor['surName']}}</option>
+        </select>
+        <div class="errors" *ngIf="formBook.get('id_autor').hasError('required') && 
+        formBook.get('id_autor').touched">
+            Не выбран автор
+        </div>
+    </div>
+
+    <div class="field">
+        Название книги: <br>
+        <input #title type="text" formControlName="title">
+
+        <div class="errors" *ngIf="formBook.get('title').hasError('required') && 
+        formBook.get('title').touched">
+            Обязательное поле.
+        </div>
+    </div>
+
+    <div class="field">
+        Количество страниц: <br>
+        <input #numberPages type="text" formControlName="numberPages">
+
+        <div class="errors" *ngIf="formBook.get('numberPages').hasError('required') && 
+        formBook.get('numberPages').touched">
+            Обязательное поле.
+        </div>
+        <div class="errors" *ngIf="formBook.get('numberPages').hasError('pattern') && 
+        formBook.get('numberPages').touched">
+            Недопустимые символы.
+        </div>
+    </div>
+
+    <div class="field">
+        Жанр: <br>
+        <select #genre formControlName="genre">
+            <option *ngFor="let item of genreMas" value="{{item['nameGenre']}}">{{item['nameGenre']}}</option>
+        </select>
+        <div class="errors" *ngIf="formBook.get('genre').hasError('required') && 
+        formBook.get('genre').touched">
+            Не выбран жанр
+        </div>
+    </div>
+
+    <br>
+    <input [style.display]="!triggerEdit ? 'block': 'none'" class="btn btn-outline-dark" type="submit"
+        (click)="addDataBook(title.value, numberPages.value, genre.value, id_autor.value)" [disabled]="!formBook.valid"
+        value="Добавить книгу">
+    <input [style.display]="triggerEdit ? 'block': 'none'" class="btn btn-outline-dark" type="submit"
+        (click)="endEditBook(title.value, numberPages.value, genre.value)" value="Сохранить изменения">
+</form>

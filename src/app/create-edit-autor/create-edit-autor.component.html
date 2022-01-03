@@ -1,0 +1,93 @@
+<div>
+    <form class="group" [formGroup]="form" (ngSubmit)="onSubmit(form)">
+
+        <h2>{{createEditAutorTitle}}</h2>
+        <div class="field">
+            Фамилия: <br>
+            <input #surName type="text" formControlName="surName">
+
+            <div class="errors" *ngIf="form.get('surName').hasError('required') && 
+            form.get('surName').touched">
+                Обязательное поле.
+            </div>
+            <div class="errors" *ngIf="form.get('surName').hasError('pattern') && 
+            form.get('surName').touched">
+                Недопустимые символы.
+            </div>
+        </div>
+
+        <div class="field">
+            Имя: <br>
+            <input #firstName type="text" formControlName="firstName">
+
+            <div class="errors" *ngIf="form.get('firstName').hasError('required') && 
+            form.get('firstName').touched">
+                Обязательное поле.
+            </div>
+            <div class="errors" *ngIf="form.get('firstName').hasError('pattern') && 
+            form.get('firstName').touched">
+                Недопустимые символы.
+            </div>
+        </div>
+
+        <div class="field">
+            Отчество: <br>
+            <input #patronymic type="text" formControlName="patronymic">
+            <div class="errors" *ngIf="form.get('patronymic').hasError('pattern') && 
+            form.get('patronymic').touched">
+                Недопустимые символы.
+            </div>
+        </div>
+
+        <div class="field">
+            Дата рождения: <br>
+            <input #dateBirth type="data" formControlName="dateBirth" placeholder="dd/MM/yyyy">
+
+            <div class="errors" *ngIf="form.get('dateBirth').hasError('required') && 
+            form.get('dateBirth').touched">
+                Обязательное поле.
+            </div>
+            <div class="errors" *ngIf="form.get('dateBirth').hasError('pattern') && 
+            form.get('dateBirth').touched">
+                Неверный формат даты.
+            </div>
+        </div>
+        <br>
+        <input [style.display]="!triggerEdit ? 'block': 'none'" class="btn btn-outline-dark" type="submit"
+            (click)="addDataAutor(surName.value, firstName.value, patronymic.value, dateBirth.value)"
+            [disabled]="!form.valid" value="Добавить автора">
+        <input [style.display]="triggerEdit ? 'block': 'none'" class="btn btn-outline-dark" type="submit"
+            (click)="endEditAutor(surName.value, firstName.value, patronymic.value, dateBirth.value)"
+            [disabled]="!form.valid" value="Сохранить изменения">
+    </form>
+</div>
+
+<div>
+    <table class="table table-hover">
+        <thead>
+            <th colspan="3">
+                <h3>Книги автора</h3>
+            </th>
+            <th>&nbsp;</th>
+            <th><input id="addAutorBtn" class="btn btn-outline-success" type="button" (click)="startCreateBook()"
+                    value="добавить"></th>
+        </thead>
+        <tbody *ngFor="let book of bookMas">
+            <tr *ngIf="book['id_autor'] == curentIdAutor">
+                <td><b>"{{ book.title }}"</b></td>
+                <td> {{ book.numberPages }} стр</td>
+                <td class="butIn"> {{ book.genre }}</td>
+                <td>
+                    <input class="btn btn-outline-primary butIn" type="button" (click)="startEditBook(book)"
+                        value="редактировать">
+                    <span class="butSp" (click)="startEditBook(book)">&#9998;</span>
+                </td>
+                <td>
+                    <input class="btn btn-outline-danger butIn" type="button" (click)="deleteCurentBook(book.id)"
+                        value="удалить">
+                    <span class="butSp" (click)="deleteCurentBook(book.id)">&times;</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
