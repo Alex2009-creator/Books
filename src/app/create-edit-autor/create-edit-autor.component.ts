@@ -5,6 +5,7 @@ import { Book } from '../shared/types/book';
 import { AutorService } from '../shared/services/autor.service';
 import { BookService } from '../shared/services/book.service';
 import { GuardAutorService } from '../shared/services/guard-autor.service';
+import { GuardBookService } from '../shared/services/guard-book.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -37,7 +38,8 @@ export class CreateEditAutorComponent implements OnInit {
     private fb: FormBuilder,
     public autorservice: AutorService,
     public bookservice: BookService,
-    public guardservice: GuardAutorService,
+    public guardautorservice: GuardAutorService,
+    public guardbookservice: GuardBookService,
     public router: Router
   ) { }
 
@@ -131,8 +133,7 @@ export class CreateEditAutorComponent implements OnInit {
 
       for (let book of this.bookMas) {
         if (book.id_autor == id) {
-          counter += 1
-          console.log(counter)
+          counter += 1          
         }
       }
 
@@ -158,6 +159,8 @@ export class CreateEditAutorComponent implements OnInit {
     this.bookservice.serviceTitle = book.title;
     this.bookservice.serviceNumberPages = book.numberPages;
     this.bookservice.serviceGenre = book.genre;
+    this.bookservice.serviceIdautor = book.id_autor;
+    this.guardbookservice.flagFormFill = true;
     this.bookservice.triggerEdit = true;
     this.routeBook()
   }
