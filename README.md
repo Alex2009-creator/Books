@@ -1,27 +1,14 @@
-# Books
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Технологии, назначение
+Приложение “Книги и авторы“ реализовано на основе Angular и TypeScript, содержит в себе базу данных книг и их авторов на основе виртуального API. Интерфейс создан с применением библиотеки Bootstrap. Шаблон приложения адаптивен.
+## Функциональные возможности
+-	Просмотр авторов (общий список) с отображением ФИО, даты рождения, а также список книг, соответствующий текущему автору.
+-	Добавление, редактирование, удаление записи об авторе. Удаление записи не допускается, если в базе присутствует хотя бы одна книга автора.
+-	Просмотр книг (общий список) с отображением названия, кол-ва страниц, жанра, а также автора.
+-	Добавление, редактирование, удаление записи о книге. При редактировании и добавлении записи выбор автора и жанра выполняются с помощью списков.
+-	Просмотр жанров. Их дополнение или удаление. Удаление не допускается, если жанр уже используется.  
+ ## Структура, описание
+Приложение содержит компоненты AutorList, BookList, CreateEditAutor, CreateEditBook, GenreListCreateEdit. Последний компонент отображает список жанров, а также содержит в себе форму с единственным полем для добавления жанра.
+Элементы управления представляют собой вкладки “Автор”, “Книга”, “Жанр”, переходя на которые можно выполнить операции просмотра, удаления, добавления или редактирования с соответствующими сущностями.
+При выборе режима редактирования или добавления происходит переход на компонент с соответствующей формой. При заполнении полей формы их содержимое проверяется на валидность, только в этом случае возможна отправка данных. Дополнительная проверка выполняется при попытке удаления автора или жанра. Для обеспечения целостности данных таблицы с данными связаны.
+Типы данных для каждой сущности описаны в отдельном файле ( shared/type/ autor | book | genre ). 
+Для каждой сущности предусмотрен отдельный сервис, для компонентов с формами предусмотрены 2 guard, обеспечивающих переход только с требуемых страниц ( shared/service/ … ). 
